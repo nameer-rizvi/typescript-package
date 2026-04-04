@@ -1,4 +1,4 @@
-const pkg = require("../package.json");
+const packageJson = require("../package.json");
 const readline = require("readline");
 const { execFileSync } = require("child_process");
 
@@ -8,31 +8,40 @@ const RANGE_PREFIXES = new Set(["^", "~"]);
 
 const MANAGER_COMMANDS = {
   npm: { remove: "uninstall", add: "install" },
-  yarn: { remove: "remove", add: "add" },
+  yarn: { add: "up" },
   pnpm: { remove: "remove", add: "add" },
 };
 
 // --- Main ---
 
-const devPkgs = getPackagesWithRanges(pkg.devDependencies);
+const devDeps = getPackagesWithRanges(packageJson.devDependencies);
 
-const prodPkgs = getPackagesWithRanges(pkg.dependencies);
+const prodDeps = getPackagesWithRanges(packageJson.dependencies);
 
-const allPkgs = [...new Set([...devPkgs, ...prodPkgs])];
+const allDeps = [...new Set([...devDeps, ...prodDeps])];
 
-if (!allPkgs.length) {
-  console.info("⚪ Package updates not detected.");
+if (!allDeps.length) {
+  console.info("⚪ Package has no dependencies to update.");
 } else {
   const userAgent = process.env.npm_config_user_agent ?? "";
 
   const manager = userAgent.split(" ")[0]?.split("/")[0]?.toLowerCase();
 
-  const { remove, add } = MANAGER_COMMANDS[manager];
+  const commands = MANAGER_COMMANDS[manager];
+
+  if (!commands) {
+    console.error(`🔴 Unsupported package manager: "${manager}"`);
+    process.exit(1);
+  }
+
+  const { remove, add } = commands;
+
+  const devFlag = manager === "yarn" ? [] : ["-D"];
 
   const steps = [
-    allPkgs.length && [remove, ...allPkgs],
-    devPkgs.length && [add, "-D", ...devPkgs],
-    prodPkgs.length && [add, ...prodPkgs],
+    remove ? [remove, ...allDeps] : null,
+    devDeps.length ? [add, ...devFlag, ...devDeps] : null,
+    prodDeps.length ? [add, ...prodDeps] : null,
   ].filter(Boolean);
 
   process.stdout.write("🟠 Package updates in-progress...");
@@ -43,6 +52,8 @@ if (!allPkgs.length) {
         stdio: ["ignore", "pipe", "pipe"],
         encoding: "utf8",
         maxBuffer: 10 * 1024 * 1024,
+        env: process.env,
+        shell: true,
       });
     }
     clearStatusLine();
