@@ -7,10 +7,22 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nameer-rizvi/typescript-package.git"
+    "url": "git+https://github.com/nameer-rizvi/typescript-package.git"
   },
+  "homepage": "https://github.com/nameer-rizvi/typescript-package#readme",
+  "bugs": {
+    "url": "https://github.com/nameer-rizvi/typescript-package/issues"
+  },
+  "keywords": [
+    "typescript",
+    "utils",
+    "utilities",
+    "esm",
+    "cjs"
+  ],
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
