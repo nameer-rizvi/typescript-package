@@ -2,7 +2,7 @@
   "name": "@nameer/typescript-package",
   "packageManager": "yarn@4.13.0",
   "version": "0.1.0",
-  "description": "Template for developing NPM packages written in TypeScript.",
+  "description": "Template for developing NPM packages written in TypeScript with support for CommonJS and ES Modules.",
   "author": "Nameer Rizvi (https://github.com/nameer-rizvi)",
   "license": "MIT",
   "repository": {
