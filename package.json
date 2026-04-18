@@ -1,5 +1,5 @@
 {
-  "name": "@nameer-rizvi/typescript-package",
+  "name": "@nameer/typescript-package",
   "packageManager": "yarn@4.13.0",
   "version": "0.1.0",
   "description": "Template for developing NPM packages written in TypeScript.",
@@ -39,6 +39,9 @@
       }
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "update": "yarn && node scripts/updateDeps.js",
     "clean": "rimraf dist",
@@ -49,7 +52,7 @@
     "build": "yarn clean && yarn lint && yarn build:cjs && yarn build:esm && node scripts/postbuild.mjs && echo '✅ Build complete! CJS and ESM outputs ready in dist/'",
     "test:cjs": "node tests/test.cjs",
     "test:esm": "node tests/test.mjs",
-    "test": "yarn test:cjs && yarn test:esm",
+    "test": "yarn build && yarn test:cjs && yarn test:esm",
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {

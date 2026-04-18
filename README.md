@@ -1,15 +1,15 @@
-# @nameer-rizvi/typescript-package
+# @nameer/typescript-package
 
-Template for developing NPM packages written in TypeScript.
+Template for developing NPM packages written in TypeScript with support for CommonJS and ES Modules.
 
 ## For Package Consumers
 
 If you're using this as a published package, install it via:
 
 ```bash
-npm install @nameer-rizvi/typescript-package
+npm install @nameer/typescript-package
 # or
-yarn add @nameer-rizvi/typescript-package
+yarn add @nameer/typescript-package
 ```
 
 ### Usage
@@ -19,13 +19,13 @@ This package supports both CommonJS and ES Modules out of the box.
 **ESM**
 
 ```js
-import * as pkg from "@nameer-rizvi/typescript-package";
+import * as pkg from "@nameer/typescript-package";
 ```
 
 **CommonJS**
 
 ```js
-const pkg = require("@nameer-rizvi/typescript-package");
+const pkg = require("@nameer/typescript-package");
 ```
 
 ## For Template Users
