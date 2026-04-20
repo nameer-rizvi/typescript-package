@@ -1,12 +1,19 @@
 {
   "compilerOptions": {
+    // Add "node" when the package uses Node.js globals like `process`, `fs`, `path`, etc.
+    // Requires `yarn add -D @types/node`.
+    // "types": ["node"],
+    // Use "ES2020" for Node.js packages or libraries.
+    // Add "DOM" when the package uses browser globals like `window`, `document`, `fetch`, `AbortController`, `URL`, `Headers`, etc.
     "target": "ES2020",
-    "lib": ["ES2020"],
+    "lib": ["ES2020"], // Mirror target. Add "DOM" alongside "ES2020" for browser/React packages.
     "rootDir": "src",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
     "strict": true,
+    // Use "bundler" for browser/React packages (e.g. Vite, webpack).
+    // Use "node16" or "nodenext" for Node.js packages — requires explicit `.js` extensions on all relative imports and a matching `"module"` setting.
     "moduleResolution": "bundler",
     "esModuleInterop": true,
     "skipLibCheck": true,
